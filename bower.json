@@ -1,0 +1,7 @@
+{
+  "name": "JSFixedHeader",
+  "version": "1.0.0",
+  "install": {
+    "path": "dist"
+  }
+}
