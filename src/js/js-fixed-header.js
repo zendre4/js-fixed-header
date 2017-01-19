@@ -1,6 +1,6 @@
 /**
  * Create fixed header in your table.
- * I'ts work in VanillaJS
+ * Developed in VanillaJS
  *
  * @param {HTMLElement} [table] - the table object
  * @param {options} [options] - the custom options
@@ -32,6 +32,8 @@ JSFixedHeader = function(table,options){
         this._createFixHeader();
     }
 };
+
+
 /**
  * Equalize width of cell in fix header
  * @private
@@ -97,13 +99,13 @@ JSFixedHeader.prototype._createFixHeader = function () {
         that._equalizeWidthOfFixHeader();
         that._showHideFixHeader();
 
-        window.onresize = function () {
+        window.addEventListener("resize", function () {
             that._equalizeWidthOfFixHeader();
-        };
+        });
 
-        window.onscroll = function (){
+        window.addEventListener("scroll",function (){
             that._showHideFixHeader();
-        }
+        });
     }
 };
 
