@@ -78,7 +78,10 @@ JSFixedHeader.prototype._showHideFixHeader = function () {
 JSFixedHeader.prototype._createFixHeader = function () {
     if(this._fixTable === null) {
         var clone=this.table.cloneNode(false);
-        clone.id=this.table.id+"-fix";
+        if(typeof this.table.id !="undefined" && this.table.id !=null) {
+            clone.id = this.table.id + "-fix";
+        }
+
         clone.style.display="none";
         clone.style.top=this.options.top+"px";
         clone.style.zIndex=this.options.zIndex;
