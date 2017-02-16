@@ -2,7 +2,7 @@
 
 Create fixed header in your table. Write in Vanilla JS.
 
-[See demo](https://zendre4.github.io/js-fixed-header/example/example1.html)
+[Visit website](https://zendre4.github.io/js-fixed-header/) OR [See demo](https://zendre4.github.io/js-fixed-header/example/example1.html)
 ## Installation
 
 ### Bower
