@@ -1,6 +1,6 @@
 {
-  "name": "JSFixedHeader",
-  "version": "1.0.0",
+  "name": "js-fixed-header",
+  "version": "1.1.2",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^0.3.0",
