@@ -7,7 +7,7 @@ Create fixed header in your table. Write in Vanilla JS.
 
 ### Bower
 <pre>
-bower install js-fixed-header
+bower install js-fixed-header-dist
 </pre>
 
 ## How to use 
