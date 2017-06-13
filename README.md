@@ -7,6 +7,12 @@ Create fixed header in your table. Write in Vanilla JS.
 
 ### Bower
 <pre>
+bower install js-fixed-header
+</pre>
+
+Or 
+
+<pre>
 bower install js-fixed-header-dist
 </pre>
 
