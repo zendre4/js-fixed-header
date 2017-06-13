@@ -6,19 +6,19 @@
  * @param {options} [options] - the custom options
  * @constructor
  * @author Julien Stalder
- * @version 1.1.2
+ * @version 1.1.3
  */
-JSFixedHeader = function(table,options){
+var JSFixedHeader = function(table,options){
 
     this.table=null;
     this._fixTable=null;
-    this.options=this._getDefaultOptions();
+    this._options=this._getDefaultOptions();
 
     if(typeof options !="undefined"){
         if(typeof options === 'object') {
             for (var key in options) {
-                if (options.hasOwnProperty(key) && typeof this.options[key] !="undefined"){
-                    this.options[key] = options[key];
+                if (options.hasOwnProperty(key) && typeof this._options[key] !="undefined"){
+                    this._options[key] = options[key];
                 }
             }
         }
@@ -34,13 +34,34 @@ JSFixedHeader = function(table,options){
 };
 
 
+
+/**
+ * Html table
+ * @type {null|HTMLElement}
+ */
+JSFixedHeader.prototype.table=null;
+
+/**
+ * The fixed header table
+ * @type {null|HTMLElement}
+ * @private
+ */
+JSFixedHeader.prototype._fixTable=null;
+
+/**
+ * Options of the current table
+ * @type {null|object}
+ * @private
+ */
+JSFixedHeader.prototype._options=null;
+
 /**
  * Equalize width of cell in fix header
  * @private
  */
 JSFixedHeader.prototype._equalizeWidthOfFixHeader = function () {
     if(this._fixTable !== null) {
-        if (this.table.style.display != "none") {
+        if (this.table.style.display !== "none") {
             var rowsLength=this.table.tHead.rows.length;
 
             for (var j = 0; j < rowsLength; j++) {
@@ -61,7 +82,7 @@ JSFixedHeader.prototype._equalizeWidthOfFixHeader = function () {
 JSFixedHeader.prototype._showHideFixHeader = function () {
     if(this._fixTable !== null) {
         if (this.table.style.display != "none") {
-            if (this._isVisible() && this.table.getBoundingClientRect().top < this.options.top) {
+            if (this._isVisible() && this.table.getBoundingClientRect().top < this._options.top) {
                 this._equalizeWidthOfFixHeader();
                 this._fixTable.style.display = "block";
             } else {
@@ -83,8 +104,8 @@ JSFixedHeader.prototype._createFixHeader = function () {
         }
 
         clone.style.display="none";
-        clone.style.top=this.options.top+"px";
-        clone.style.zIndex=this.options.zIndex;
+        clone.style.top=this._options.top+"px";
+        clone.style.zIndex=this._options.zIndex;
         clone.style.position="fixed";
         if(clone.className!=""){
             clone.className+=" js-fixed-header";
@@ -116,6 +137,7 @@ JSFixedHeader.prototype._createFixHeader = function () {
 /**
  * Default options of the plugin
  * @private
+ * @return {object}
  */
 JSFixedHeader.prototype._getDefaultOptions = function() {
     return {
@@ -131,7 +153,7 @@ JSFixedHeader.prototype._getDefaultOptions = function() {
  * @private
  */
 JSFixedHeader.prototype._isVisible  = function() {
-    if(this.table!=null) {
+    if(this.table!==null) {
         var element=this.table;
 
         var top = element.offsetTop;
