@@ -6,7 +6,7 @@
  * @param {options} [options] - the custom options
  * @constructor
  * @author Julien Stalder
- * @version 1.1.3
+ * @version 1.1.4
  */
 var JSFixedHeader = function(table,options){
 
