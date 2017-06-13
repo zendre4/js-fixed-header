@@ -1,6 +1,10 @@
 {
   "name": "js-fixed-header",
-  "version": "1.2.0",
+  "version": "1.2.1",
+  "homepage": "https://zendre4.github.io/js-fixed-header",
+  "authors": [
+    "Julien Stalder"
+  ],
   "ignore":[
     "*",
     "!/dist/**",

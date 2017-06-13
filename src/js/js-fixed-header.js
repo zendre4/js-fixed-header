@@ -2,11 +2,12 @@
  * Create fixed header in your table.
  * Developed in VanillaJS
  *
- * @param {HTMLElement} [table] - the table object
+ * @param {HTMLElement|string} table - the table element or the table id
  * @param {options} [options] - the custom options
  * @constructor
  * @author Julien Stalder
- * @version 1.2.0
+ * @version 1.2.1
+ * {@link https://zendre4.github.io/js-fixed-header}.
  */
 var JSFixedHeader = function(table,options){
 
