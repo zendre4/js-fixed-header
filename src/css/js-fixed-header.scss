@@ -1,10 +1,15 @@
 table.js-fixed-header{
   table-layout: fixed;
-  position: fixed;
   background-color: white;
-  width: auto !important;
   margin: 0;
 
+  &.js-fixed-header-type-css-fixed{
+    position: fixed !important;
+    width: auto !important;
+  }
+  &.js-fixed-header-type-js-fixed{
+    position: absolute !important;
+  }
   tr th{
     box-sizing: border-box;
   }

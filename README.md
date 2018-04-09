@@ -26,6 +26,7 @@ fixedTable.destroy();
 ```javascript
 {
     "top" : 0,
-    "zIndex" : 100
+    "zIndex" : 100,
+    "type":JSFixedHeader.TYPE_CSS_FIXED    
 }
 ```
