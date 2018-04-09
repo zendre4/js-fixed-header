@@ -6,7 +6,7 @@
  * @param {options} [options] - the custom options
  * @constructor
  * @author Julien Stalder
- * @version 1.3.0
+ * @version 1.3.1
  * {@link https://zendre4.github.io/js-fixed-header}.
  */
 var JSFixedHeader = function(table,options){
@@ -68,7 +68,7 @@ JSFixedHeader.TYPE_CSS_FIXED="css-fixed";
 
 /**
  * Type fixed with JS (with position:absolute).
- * Working better in responsive environment
+ * Working better in responsive environment (in very small context)
  * @const
  * @type {string}
  */
@@ -102,9 +102,9 @@ JSFixedHeader.prototype._equalizeWidthOfFixHeader = function () {
     if(this._fixTable !== null) {
         if (this.table.style.display !== "none") {
             var rowsLength=this.table.tHead.rows.length;
-            if(this._options.type===JSFixedHeader.TYPE_JS_FIXED) {
-                this._fixTable.style.width = this.table.clientWidth + "px";
-            }
+
+            this._fixTable.style.width = this.table.clientWidth + "px";
+
             for (var j = 0; j < rowsLength; j++) {
                 var cellsLength = this.table.rows[j].cells.length;
 
@@ -117,20 +117,23 @@ JSFixedHeader.prototype._equalizeWidthOfFixHeader = function () {
 };
 
 /**
- * Fix the absolute position of header (only if type is js fixed)
+ * Fix the absolute position of header
  * @private
  */
 JSFixedHeader.prototype._fixPosition = function () {
-    if(this._options.type===JSFixedHeader.TYPE_JS_FIXED) {
-        if (this._fixTable !== null) {
-            if (this.table.style.display !== "none") {
-                if (this._isVisible()) {
+    if (this._fixTable !== null) {
+        if (this.table.style.display !== "none") {
+            if (this._isVisible()) {
 
-                    var bodyRect = document.body.getBoundingClientRect();
-                    var elemRect = this.table.getBoundingClientRect();
-                    var offset = elemRect.left - bodyRect.left;
+                var bodyRect = document.body.getBoundingClientRect();
+                var elemRect = this.table.getBoundingClientRect();
+                var offset = elemRect.left - bodyRect.left;
 
+                if(this._options.type===JSFixedHeader.TYPE_JS_FIXED) {
                     this._fixTable.style.left = offset + "px";
+                }else{
+                    var scrollPosition = (window.pageXOffset || document.documentElement.scrollLeft);
+                    this._fixTable.style.left = (offset+(scrollPosition * -1))+ "px";
                 }
             }
         }
@@ -229,6 +232,22 @@ JSFixedHeader.prototype._callScroll = function (){
 
                         var scrollPosition = (window.pageYOffset || document.documentElement.scrollTop);
                         that._fixTable.style.top = (scrollPosition + that._options.top) + "px";
+                    });
+                }
+            }
+        }
+    }else {
+        if (this._isVisible()) {
+            if (!this._scheduledAnimationFrame) {
+                var raf = window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+                if (raf) {
+                    var that = this;
+                    this._scheduledAnimationFrame = true;
+
+                    raf(function () {
+                        that._scheduledAnimationFrame = false;
+                        that._fixPosition();
                     });
                 }
             }
